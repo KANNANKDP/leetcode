@@ -42,3 +42,26 @@ class Solution2 {
     }
 }
 
+class Solution3 {
+    public int[] smallerNumbersThanCurrent(int[] nums) {
+        int res[] = Arrays.copyOf(nums, nums.length);
+        Map<Integer, Integer> hashMap = new HashMap<>();
+        int count = 0;
+        
+        Arrays.sort(nums);
+    
+        hashMap.put(nums[0], count);
+        for (int i = 1; i < nums.length; i++) {
+            count++;
+            if (nums[i] != nums[i - 1])
+                hashMap.put(nums[i], count);
+        }
+        
+        for (int i = 0; i < res.length; i++) {
+            res[i] = hashMap.get(res[i]);
+        }
+        
+        return res;
+    }
+}
+
